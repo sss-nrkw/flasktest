@@ -1,0 +1,15 @@
+<!-- edit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Message</title>
+</head>
+<body>
+    <h1>Edit Message</h1>
+    <form action="/edit/{{ message[0] }}" method="POST">
+        <input type="text" name="content" value="{{ message[1] }}" required>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

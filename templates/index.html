@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>うきうき掲示板</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 投稿内容に影を追加 */
+        ul li {
+            box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1); /* 影の設定 */
+            padding: 10px; /* 影が影響する範囲を確保するためにパディングを追加 */
+            border-radius: 5px;
+            background-color: white; /* 影が被って見える部分を白色にする */
+            margin-bottom: 10px;
+        }
+
+        /* レスポンシブ対応 */
+        @media screen and (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            input[type="text"] {
+                width: 100%; /* 幅を100%に変更 */
+            }
+            ul li {
+                box-shadow: none; /* 小さなデバイスでは影を削除 */
+                margin-bottom: 5px; /* 間隔を調整 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>うきうき掲示板</h1>
+    <form action="/create" method="POST">
+        <input type="text" name="content" placeholder="メッセージを入れてね" required>
+        <button type="submit">Post</button>
+    </form>
+    <ul>
+        {% for message in messages %}
+        <li>
+            {{ message[1] }}
+            <a href="/edit/{{ message[0] }}">Edit</a>
+            <form action="/delete/{{ message[0] }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
